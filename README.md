@@ -1,5 +1,7 @@
 # @reallyuseful/youmail-client
 
+[![npm](https://img.shields.io/npm/v/@reallyuseful/youmail-client.svg)](https://www.npmjs.com/package/@reallyuseful/youmail-client) [![dependencies](https://img.shields.io/david/natesilva/youmail-client.svg)](https://www.npmjs.com/package/@reallyuseful/youmail-client) [![license](https://img.shields.io/github/license/natesilva/youmail-client.svg)](https://github.com/natesilva/youmail-client/blob/master/LICENSE) [![node](https://img.shields.io/node/v/@reallyuseful/youmail-client.svg)](https://www.npmjs.com/package/@reallyuseful/youmail-client)
+
 **A Node.js interface for the YouMail Spam Caller API (Unofficial)**
 
 Use the [YouMail Spam Caller API](https://data.youmail.com/) to determine if an incoming
