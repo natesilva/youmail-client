@@ -1,0 +1,43 @@
+import * as PhoneNumber from '@reallyuseful/phonenumber';
+import fetch, { RequestInit } from 'node-fetch';
+import { URL } from 'url';
+import { ApiResponse } from './apiResponse';
+
+const USER_AGENT = 'reallyuseful-youmail-client/1.0';
+
+const YOUMAIL_SPAM_CALLER_API_URL = 'https://dataapi.youmail.com/api/v2/phone/';
+console.assert(YOUMAIL_SPAM_CALLER_API_URL.endsWith('/'));
+
+export interface ApiRequestOptions {
+  apiSid: string;
+  apiKey: string;
+  callerNumber: string;
+  callerId?: string;
+  calledNumber?: string;
+}
+
+export async function sendRequest(options: ApiRequestOptions): Promise<ApiResponse> {
+  const url = new URL(YOUMAIL_SPAM_CALLER_API_URL);
+  url.pathname += options.callerNumber;
+  url.searchParams.set('format', 'json');
+
+  if (options.callerId) {
+    url.searchParams.set('callerId', options.callerId);
+  }
+
+  if (options.calledNumber && PhoneNumber.valid(options.calledNumber)) {
+    url.searchParams.set('callee', options.calledNumber);
+  }
+
+  const req: RequestInit = {
+    method: 'GET',
+    headers: {
+      'User-Agent': USER_AGENT,
+      DataApiSid: options.apiSid,
+      DataApiKey: options.apiKey
+    }
+  };
+
+  const res = await fetch(url.toString(), req);
+  return res.json();
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@reallyuseful/youmail-client",
+  "version": "1.0.0",
+  "description": "A Node.js client for the YouMail Spam Caller API (Unofficial)",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "scripts": {
+    "clean": "del-cli build",
+    "build": "tsc",
+    "prettier": "prettier --write \"{src,test}/**/*.?(ts|json)\"",
+    "prepare": "npm test && npm run clean && npm run build",
+    "test": "ava",
+    "test:watch": "ava -w"
+  },
+  "keywords": [
+    "logger",
+    "logging",
+    "logs"
+  ],
+  "author": "Nate Silva <nate@natesilva.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.4",
+    "@types/node-fetch": "^2.1.2",
+    "ava": "1.0.0-beta.8",
+    "del-cli": "^1.1.0",
+    "prettier": "^1.14.3",
+    "testdouble": "^3.8.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "@reallyuseful/phonenumber": "^1.2.0",
+    "node-fetch": "^2.2.0"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register/transpile-only"
+    ]
+  },
+  "prettier": {
+    "printWidth": 90,
+    "singleQuote": true
+  }
+}
