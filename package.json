@@ -19,6 +19,7 @@
   ],
   "author": "Nate Silva <nate@natesilva.com>",
   "license": "MIT",
+  "repository": "natesilva/youmail-client",
   "engines": {
     "node": ">=8.0.0"
   },
