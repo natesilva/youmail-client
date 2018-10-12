@@ -13,9 +13,10 @@
     "test:watch": "ava -w"
   },
   "keywords": [
-    "logger",
-    "logging",
-    "logs"
+    "youmail",
+    "robocall",
+    "spam",
+    "phone call"
   ],
   "author": "Nate Silva <nate@natesilva.com>",
   "license": "MIT",
