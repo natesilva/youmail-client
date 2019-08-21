@@ -2,7 +2,11 @@
 test.*
 src
 .vscode
-ava.config.js
+.mocharc.json
 .prettier*
 .editorconfig
-screenshot.png
+*.sublime-*
+coverage
+.nyc_output
+*.spec.ts
+ts*.json

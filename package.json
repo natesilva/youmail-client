@@ -8,9 +8,10 @@
     "clean": "del-cli build",
     "build": "tsc",
     "prettier": "prettier --write \"{src,test}/**/*.?(ts|json)\"",
-    "prepare": "npm test && npm run clean && npm run build",
-    "test": "ava",
-    "test:watch": "ava -w"
+    "prepare": "npm run clean && npm run build",
+    "test": "mocha ./src/**/*.spec.ts",
+    "test:watch": "mocha ./src/**/*.spec.ts  -w --watch-extensions ts",
+    "coverage": "nyc --reporter lcov --reporter text --extension .ts mocha ./src/**/*.spec.ts"
   },
   "keywords": [
     "youmail",
@@ -22,33 +23,23 @@
   "license": "MIT",
   "repository": "natesilva/youmail-client",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.11.4",
-    "@types/node-fetch": "^2.1.2",
-    "ava": "1.0.0-beta.8",
-    "del-cli": "^1.1.0",
-    "prettier": "^1.14.3",
-    "testdouble": "^3.8.1",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.14.16",
+    "@types/node-fetch": "^2.5.0",
+    "del-cli": "^2.0.0",
+    "mocha": "^6.2.0",
+    "np": "^5.0.3",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
+    "testdouble": "^3.12.4",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@reallyuseful/phonenumber": "^1.5.0",
-    "node-fetch": "^2.2.0"
-  },
-  "ava": {
-    "compileEnhancements": false,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register/transpile-only"
-    ]
-  },
-  "prettier": {
-    "printWidth": 90,
-    "singleQuote": true
+    "@reallyuseful/phonenumber": "^1.5.2",
+    "node-fetch": "^2.6.0"
   }
 }
