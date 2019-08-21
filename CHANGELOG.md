@@ -1,3 +1,5 @@
+Future changelogs will be found on the [Releases](https://github.com/natesilva/youmail-client/releases) page.
+
 ### Version 2.0.0
 
 - Node 10 is now the minimum supported version.
