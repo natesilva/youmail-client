@@ -1,6 +1,6 @@
-import * as PhoneNumber from '@reallyuseful/phonenumber';
 import { ApiResponse } from './apiResponse';
 import { ApiRequestOptions, sendRequest } from './sendRequest';
+import util from './util';
 
 export interface LookupOptions {
   /** the caller’s phone number */
@@ -27,12 +27,12 @@ export interface LookupResult {
  * Otherwise, return it unchanged.
  */
 function formatNumberForYouMail(phoneNumber?: string) {
-  if (!phoneNumber || !PhoneNumber.valid(phoneNumber)) {
+  if (!phoneNumber || !util.isValidNorthAmericanNumber(phoneNumber)) {
     return phoneNumber;
   }
 
-  const parts = PhoneNumber.parse(phoneNumber);
-  return `${parts.npa}${parts.nxx}${parts.station}`;
+  const e164 = util.formatPhoneNumber(phoneNumber);
+  return e164.slice(2); // AAABBBCCCC (AAA = NPA, BBB = NXX, CCCC = Station)
 }
 
 /** Client for the YouMail Spam Caller (Big Data) API. */
@@ -65,7 +65,10 @@ export class YouMailClient {
     const result = {} as LookupResult;
     result.raw = apiResponse;
     result.ok = apiResponse.statusCode >= 10000 && apiResponse.statusCode <= 10999;
-    result.spamRisk = apiResponse.recordFound ? apiResponse.spamRisk!.level : undefined;
+    result.spamRisk =
+      apiResponse.recordFound && apiResponse.spamRisk
+        ? apiResponse.spamRisk.level
+        : undefined;
 
     return result;
   }

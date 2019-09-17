@@ -1,7 +1,7 @@
-import * as PhoneNumber from '@reallyuseful/phonenumber';
 import fetch, { RequestInit } from 'node-fetch';
 import { URL } from 'url';
 import { ApiResponse } from './apiResponse';
+import util from './util';
 
 const USER_AGENT = 'reallyuseful-youmail-client/1.0';
 
@@ -25,7 +25,7 @@ export async function sendRequest(options: ApiRequestOptions): Promise<ApiRespon
     url.searchParams.set('callerId', options.callerId);
   }
 
-  if (options.calledNumber && PhoneNumber.valid(options.calledNumber)) {
+  if (options.calledNumber && util.isValidNorthAmericanNumber(options.calledNumber)) {
     url.searchParams.set('callee', options.calledNumber);
   }
 

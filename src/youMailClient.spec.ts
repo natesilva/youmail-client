@@ -30,7 +30,7 @@ describe('youMailClient', () => {
     const result = await client.lookup('caller phone number');
 
     assert(result.ok);
-    assert.strictEqual(result.spamRisk, res.spamRisk!.level);
+    assert.strictEqual(result.spamRisk, res.spamRisk && res.spamRisk.level);
   });
 
   it('returns undefined spamRisk when the API record is not found', async () => {
@@ -114,7 +114,7 @@ describe('youMailClient', () => {
     const result = await client.lookup('+1 (206) 867-1234');
 
     assert.strictEqual(result.ok, false);
-    assert.strictEqual(result.spamRisk, res.spamRisk!.level);
+    assert.strictEqual(result.spamRisk, res.spamRisk && res.spamRisk.level);
   });
 
   it('doesn’t normalize invalid phone numbers', async () => {
@@ -159,7 +159,7 @@ describe('youMailClient', () => {
     });
 
     assert.strictEqual(result.ok, false);
-    assert.strictEqual(result.spamRisk, res.spamRisk!.level);
+    assert.strictEqual(result.spamRisk, res.spamRisk && res.spamRisk.level);
   });
 
   it('doesn’t normalize calledNumber if it isn’t valid', async () => {
@@ -182,7 +182,7 @@ describe('youMailClient', () => {
     });
 
     assert.strictEqual(result.ok, false);
-    assert.strictEqual(result.spamRisk, res.spamRisk!.level);
+    assert.strictEqual(result.spamRisk, res.spamRisk && res.spamRisk.level);
   });
 
   it('passes through callerId', async () => {
@@ -205,6 +205,6 @@ describe('youMailClient', () => {
     });
 
     assert.strictEqual(result.ok, false);
-    assert.strictEqual(result.spamRisk, res.spamRisk!.level);
+    assert.strictEqual(result.spamRisk, res.spamRisk && res.spamRisk.level);
   });
 });

@@ -1,12 +1,9 @@
+import * as assert from 'assert';
 import { describe, it } from 'mocha';
+import * as fetchModule from 'node-fetch';
 import * as td from 'testdouble';
 import * as sendRequestModule from './sendRequest';
-import { ApiResponse } from './apiResponse';
-import { StatusCode } from './statusCode';
-import { YouMailClient } from './youMailClient';
-import * as assert from 'assert';
-import * as fetchModule from 'node-fetch';
-import * as PhoneNumber from '@reallyuseful/phonenumber';
+import util from './util';
 
 describe('sendRequest', () => {
   afterEach(() => {
@@ -54,8 +51,8 @@ describe('sendRequest', () => {
     const expectedUrl =
       'https://dataapi.youmail.com/api/v2/phone/the-caller-number?format=json&callee=the-called-number';
 
-    td.replace(PhoneNumber, 'valid');
-    td.when(PhoneNumber.valid('the-called-number')).thenReturn(true);
+    td.replace(util, 'isValidNorthAmericanNumber');
+    td.when(util.isValidNorthAmericanNumber('the-called-number')).thenReturn(true);
 
     td.replace(fetchModule, 'default');
     td.when(fetchModule.default(expectedUrl, td.matchers.anything())).thenResolve({
@@ -76,8 +73,8 @@ describe('sendRequest', () => {
     const expectedUrl =
       'https://dataapi.youmail.com/api/v2/phone/the-caller-number?format=json';
 
-    td.replace(PhoneNumber, 'valid');
-    td.when(PhoneNumber.valid('the-called-number')).thenReturn(false);
+    td.replace(util, 'isValidNorthAmericanNumber');
+    td.when(util.isValidNorthAmericanNumber('the-called-number')).thenReturn(false);
 
     td.replace(fetchModule, 'default');
     td.when(fetchModule.default(expectedUrl, td.matchers.anything())).thenResolve({

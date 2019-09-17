@@ -8,6 +8,7 @@
     "clean": "del-cli build",
     "build": "tsc",
     "prettier": "prettier --write \"{src,test}/**/*.?(ts|json)\"",
+    "lint": "eslint --ext .ts .",
     "prepare": "npm run clean && npm run build",
     "test": "mocha ./src/**/*.spec.ts",
     "test:watch": "mocha ./src/**/*.spec.ts  -w --watch-extensions ts",
@@ -26,20 +27,25 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
+    "@types/google-libphonenumber": "^7.4.17",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^10.14.16",
+    "@types/node": "^10.14.18",
     "@types/node-fetch": "^2.5.0",
-    "del-cli": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "del-cli": "^3.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
     "mocha": "^6.2.0",
-    "np": "^5.0.3",
+    "np": "^5.1.0",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "testdouble": "^3.12.4",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@reallyuseful/phonenumber": "^1.5.2",
+    "google-libphonenumber": "^3.2.5",
     "node-fetch": "^2.6.0"
   }
 }
