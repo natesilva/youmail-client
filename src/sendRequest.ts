@@ -1,4 +1,5 @@
-import fetch, { RequestInit } from 'node-fetch';
+import AbortController from 'abort-controller';
+import fetch, { RequestInit, Response } from 'node-fetch';
 import { URL } from 'url';
 import { ApiResponse } from './apiResponse';
 import util from './util';
@@ -36,10 +37,27 @@ export async function sendRequest(options: ApiRequestOptions): Promise<ApiRespon
     headers: {
       'User-Agent': USER_AGENT,
       DataApiSid: options.apiSid,
-      DataApiKey: options.apiKey
-    }
+      DataApiKey: options.apiKey,
+    },
   };
 
-  const res = await fetch(url.toString(), req);
-  return res.json();
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  if (options.timeoutMs) {
+    req.signal = signal;
+    setTimeout(() => controller.abort(), options.timeoutMs);
+  }
+
+  let res: Response;
+
+  try {
+    res = await fetch(url.toString(), req);
+    return res.json();
+  } catch (error) {
+    if (error.type === 'aborted') {
+      throw new Error('The request was aborted');
+    }
+    throw error;
+  }
 }
