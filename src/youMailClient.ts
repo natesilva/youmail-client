@@ -9,6 +9,8 @@ export interface LookupOptions {
   callerId?: string;
   /** the callee (the phone number being called) */
   calledNumber?: string;
+  /** abandon the request and reject with an error after this amount of time */
+  timeoutMs?: number;
 }
 
 export interface LookupResult {
@@ -57,7 +59,7 @@ export class YouMailClient {
       callerNumber,
       calledNumber,
       apiSid: this.apiSid,
-      apiKey: this.apiKey
+      apiKey: this.apiKey,
     });
 
     const apiResponse = await sendRequest(requestOptions);
