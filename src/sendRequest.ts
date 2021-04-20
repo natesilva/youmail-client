@@ -14,6 +14,8 @@ export interface ApiRequestOptions {
   callerNumber: string;
   callerId?: string;
   calledNumber?: string;
+  /** abandon the request and reject with an error after this amount of time */
+  timeoutMs?: number;
 }
 
 export async function sendRequest(options: ApiRequestOptions): Promise<ApiResponse> {
