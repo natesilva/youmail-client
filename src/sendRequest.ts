@@ -6,7 +6,7 @@ import util from './util';
 
 const USER_AGENT = 'reallyuseful-youmail-client/1.0';
 
-const YOUMAIL_SPAM_CALLER_API_URL = 'https://dataapi.youmail.com/api/v2/phone/';
+export const YOUMAIL_SPAM_CALLER_API_URL = 'https://dataapi.youmail.com/api/v2/phone/';
 console.assert(YOUMAIL_SPAM_CALLER_API_URL.endsWith('/'));
 
 export interface ApiRequestOptions {
