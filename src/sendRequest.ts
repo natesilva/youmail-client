@@ -43,10 +43,11 @@ export async function sendRequest(options: ApiRequestOptions): Promise<ApiRespon
 
   const controller = new AbortController();
   const signal = controller.signal;
+  let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
   if (options.timeoutMs) {
     req.signal = signal;
-    setTimeout(() => controller.abort(), options.timeoutMs);
+    timeout = setTimeout(() => controller.abort(), options.timeoutMs);
   }
 
   let res: Response;
@@ -59,5 +60,9 @@ export async function sendRequest(options: ApiRequestOptions): Promise<ApiRespon
       throw new Error('The request was aborted');
     }
     throw error;
+  } finally {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
   }
 }
