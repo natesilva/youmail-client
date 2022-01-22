@@ -49,6 +49,6 @@
   "dependencies": {
     "abort-controller": "^3.0.0",
     "google-libphonenumber": "^3.2.19",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.1.1"
   }
 }
